@@ -1,0 +1,30 @@
+//https://leetcode.com/problems/valid-parentheses/description/
+
+class Solution {
+    public boolean isValid(String s) {
+		HashMap<String, String> b = new HashMap<String, String>();
+		b.put("}","{");
+		b.put("]","[");
+		b.put(")","(");
+		b.put(">","<");
+    String[] sub = s.split("");
+		Stack<String> st = new Stack<String>();
+		for(String i:sub){
+		    if(b.values().contains(i)){
+		        st.push(i);
+		    }else{
+		        if(!st.empty() && b.get(i).equals(st.peek())){
+		            st.pop();
+		        }
+		        else{
+		            return false;
+		        }
+		    }
+		}
+		if(st.empty()){
+		return true;
+		}else{
+			return false;
+		}
+    }
+}
